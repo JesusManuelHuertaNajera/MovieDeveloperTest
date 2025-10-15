@@ -3,7 +3,7 @@ import 'package:mymovies/content/config/colors/main.dart';
 import 'package:mymovies/content/config/styles/main.dart';
 import 'package:mymovies/content/controller/Home/main.dart';
 import 'package:mymovies/content/controller/services/movie_manager.dart';
-import 'package:mymovies/content/view/home/component/comming_soon_item.dart';
+import 'package:mymovies/content/view/home/component/comming_soon_trend_item.dart';
 
 Widget CommingSoonSection(HomeController controller) {
   return Padding(
@@ -21,9 +21,8 @@ Widget CommingSoonSection(HomeController controller) {
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
-              ...MovieManager()
-                  .newMovies
-                  .map((movie) => commingSoonItem(movie)),
+              ...MovieManager().newMovies.map(
+                  (movie) => commingSoonTrendItem(movie, controller.context)),
             ],
           ),
         )

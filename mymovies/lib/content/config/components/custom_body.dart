@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mymovies/content/config/colors/main.dart';
+import 'package:mymovies/content/config/components/loader_screen.dart';
 import 'package:mymovies/content/config/styles/main.dart';
 
 Widget customBody(
@@ -42,11 +43,7 @@ Widget customBody(
             ),
           ),
           child: showLoader
-              ? const Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.white,
-                  ),
-                )
+              ? loaderScreen()
               : body ??
                   ListView(
                     controller: controllerScroll,

@@ -38,8 +38,16 @@ class _MySplashState extends State<MySplash> {
   void initState() {
     Timer(const Duration(seconds: 2), () {
       Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(
-          builder: (context) => const MyHomePage(),
+        PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              const MyHomePage(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(
+              opacity: animation,
+              child: child,
+            );
+          },
+          transitionDuration: const Duration(milliseconds: 400),
         ),
         (Route<dynamic> route) => false,
       );

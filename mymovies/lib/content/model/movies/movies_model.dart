@@ -1,7 +1,10 @@
 import 'package:mymovies/content/config/api/config.dart';
 import 'package:mymovies/content/config/methods/dowload_image.dart';
+import 'package:mymovies/content/controller/API/Movies/main.dart';
+import 'package:mymovies/content/model/movies/movie_detail_model.dart';
+import 'package:mymovies/content/model/movies/movie_video_model.dart';
 
-class Movie {
+class MovieModel {
   final bool adult;
   final String? backdropPath;
   final List<int> genreIds;
@@ -16,8 +19,10 @@ class Movie {
   final bool video;
   final double voteAverage;
   final int voteCount;
+  MovieDetailModel? movieDetail;
+  MovieVideosModel? videos;
   String? base64Image;
-  Movie({
+  MovieModel({
     required this.adult,
     this.backdropPath,
     required this.genreIds,
@@ -49,8 +54,26 @@ class Movie {
     return true;
   }
 
-  factory Movie.fromJson(Map<String, dynamic> json) {
-    return Movie(
+  Future<bool> getDetail() async {
+    try {
+      movieDetail = await MovieEndpoints.getMovieDetail(id);
+    } catch (e) {
+      return false;
+    }
+    return movieDetail != null;
+  }
+
+  Future<bool> getVideos() async {
+    try {
+      videos = await MovieEndpoints.getMovieVideo(id);
+    } catch (e) {
+      return false;
+    }
+    return videos != null;
+  }
+
+  factory MovieModel.fromJson(Map<String, dynamic> json) {
+    return MovieModel(
       adult: json['adult'] ?? false,
       backdropPath: json['backdrop_path'],
       genreIds: List<int>.from(json['genre_ids'] ?? []),

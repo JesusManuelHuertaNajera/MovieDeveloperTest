@@ -1,3 +1,4 @@
+import 'package:mymovies/content/model/filters/recommend_filter_model.dart';
 import 'package:mymovies/content/model/movies/movies_model.dart';
 
 class MovieManager {
@@ -7,6 +8,8 @@ class MovieManager {
   }
   MovieManager._internal();
 
-  List<Movie> newMovies = [];
-  List<Movie> trendMovies = [];
+  List<MovieModel> newMovies = [];
+  List<MovieModel> trendMovies = [];
+  List<RecommendFilterModel> filters = [];
+  RecommendFilterModel? filterSelected;
 }
